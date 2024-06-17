@@ -1,116 +1,25 @@
-# Avaliação Final
+## Avaliação Final Banco de Dados
 
-1) No seu github pessoal, criar um repositório de banco de dados (caso ainda não exista) e dentro dele um arquivo chamado vocabulario.md. Nele preencher o significado das expressões abaixo, mantendo o texto ordenado:
-	- sistema gerenciador de banco de dados
-	- restrições em banco de dados
-	- modelo relacional
-	- modelagem conceitual
-	- modelagem lógica
-	- modelagem física
-	- linguagem SQL
-	- Data Definition Language (DDL)
-	- Data Manipulation Language (DML)
-	- Boas práticas em modelagem de banco de dados
+1) Preencha o significado das expressões abaixo, mantendo o texto ordenado:
+  	- sistema gerenciador de banco de dados = Um SGBD é um software que permite aos usuários criar, modificar e gerenciar 	um banco de dados.
+	
+ 	- restrições em banco de dados = Restrições são regras aplicadas aos dados para garantir a integridade e a 		consistência. Exemplos incluem chaves primárias, chaves estrangeiras, restrições de unicidade e regras de verificação.
+	
+ 	- modelo relacional = É um modelo de dados organizado em torno de relações que consistem em tuplas e atributos. É 	amplamente utilizado em bancos de dados relacionais.
+	
+ 	- modelagem conceitual = Envolve a criação de um modelo de dados abstrato que representa os requisitos do sistema de 	forma independente de implementação técnica.
+	
+ 	- modelagem lógica = Traduz o modelo conceitual para um modelo de dados lógico, geralmente usando o modelo relacional. 	Aqui, as entidades, relacionamentos e atributos são mapeados para tabelas, chaves, índices, etc.
 
-2) Por meio do MySQL Workbench OU MS Studio Managament faça o seguinte esquema de banco e responda as questões.
+	- modelagem física = É a fase em que o modelo de dados lógico é implementado em um SGBD específico. Inclui detalhes 	como tipos de dados, índices físicos e estruturas de armazenamento.
+	
+ 	- linguagem SQL = SQL (Structured Query Language) é uma linguagem de consulta estruturada usada para acessar e 		manipular bancos de dados relacionais.
+	
+ 	- Data Definition Language (DDL) = Parte do SQL utilizada para definir a estrutura e o esquema do banco de dados. 	Exemplos incluem CREATE, ALTER e DROP para criar, modificar e excluir objetos como tabelas, índices, etc.
+	
+ 	- Data Manipulation Language (DML) = Parte do SQL usada para manipular os dados dentro do banco de dados. Inclui 	comandos como INSERT, UPDATE e DELETE para adicionar, modificar e remover dados das tabelas.
+	
+ 	- Boas práticas em modelagem de banco de dados = Incluem a normalização de dados para evitar redundâncias, uso 		adequado de chaves primárias e estrangeiras para manter integridade referencial, definição de índices para melhorar a 	performance de consultas, entre outros.
 
-create database locadora; 
-use locadora;
-
-create table escritorio(
-	id_escritorio int primary key not null auto_increment,
-    nome varchar(255) default null,
-    endereco varchar(255) default null
-);
-
-INSERT INTO escritorio (endereco,nome)
-VALUES ('Endereco_escritorio1','escritorio1'),
-('Endereco_escritorio2','escritorio2'),
-('Endereco_escritorio3','escritorio3'),
-('Endereco_escritorio4','escritorio4'),
-('Endereco_escritorio5','escritorio5'),
-('Endereco_escritorio6','escritorio6');
-
-create table cliente(
-	id_cliente int primary key not null auto_increment,
-	telefone varchar(20) default null,
-    endereco varchar(100) default null,
-    nome varchar(100) default null,
-    uf_cnh varchar(3) default null,
-    cnh varchar (30) default null
-);
-
-INSERT INTO cliente (telefone,endereco,nome,uf_cnh,cnh)
-VALUES (null,'Endereco_cliente1','Juca da Silva','RS','255698563256'),
-('55985632589','Endereco_cliente2','Juca da Silva','RS','265698563259'),
-('55935632555','Endereco_cliente3','Gabriel Almeida','SC','295698563258'),
-('55995632533','Endereco_cliente4','Paulo José','PR','305698563256'),
-('55995632522','Endereco_cliente5','Alexandre Zamberlan','SP','315698563257'),
-(null,'Endereco_cliente6','Jose','RS','255698563256');
-
-create table tipo_veiculo(
-	id_tipo_veiculo int primary key not null auto_increment,
-    nome varchar(100) default null
-);
-
-INSERT INTO tipo_veiculo (nome)
-VALUES ('sedan'),
-('hat'),
-('caminhonete'),
-('caminhao'),
-('onibus');
-
-create table veiculo(
-	id_veiculo int primary key not null auto_increment,
-    id_tipo_veiculo int not null,
-	placa varchar(10) default null,
-    data_proxima_manutencao date default null,
-    foreign key (id_tipo_veiculo) references tipo_veiculo(id_tipo_veiculo)
-);
-
-INSERT INTO veiculo (id_tipo_veiculo,placa,data_proxima_manutencao)
-VALUES (1,'IXT7853','2024-12-12'),
-(1,'IXT7877','2023-12-12'),
-(2,'JXT2323','2025-12-12'),
-(2,'IXT6987','2024-12-12'),
-(3,'IXT6969','2025-9-12'),
-(4,'IXT4242','2023-12-12'),
-(1,'IXT0003','2023-10-12'),
-(1,'IXT7853','2024-12-12');
-
-create table contrato_aluguel(
-	id_contrato_aluguel int primary key not null auto_increment,
-    id_cliente int not null,
-    id_escritorio int not null,
-    id_veiculo int not null,
-    data_contrato date default null,
-    duracao int default null,
-    
-    foreign key (id_cliente) references cliente(id_cliente),
-    foreign key (id_escritorio) references escritorio(id_escritorio),
-    foreign key (id_veiculo) references veiculo(id_veiculo)
-);
-
-INSERT INTO contrato_aluguel (id_cliente,id_escritorio,id_veiculo,data_contrato,duracao)
-VALUES (1,2,1,'2023-06-07',3),
-(2,1,3,'2023-06-07',2),
-(3,3,2,'2023-06-07',24),
-(4,2,4,'2023-06-07',1),
-(5,4,7,'2023-06-07',12);
-
-# Todos os clientes armazenados no sistema:
-
-
-# Exiba os veículos que tenham final 3 no número da placa
-
-
-# Mostre os clientes que residem no RS e que não possuam telefone
-
-
-# Exiba o código dos clientes que alugaram veículos por mais de 90 dias.
-
-# Quantos veículos há cadastrados no sistema
-
-# Mostre o veículo alugado por Alexandre Zamberlan.
-
-# Mostre os clientes e os escritórios associados no contrato de aluguel.
+2)
+   
