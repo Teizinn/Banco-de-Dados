@@ -57,7 +57,7 @@
 		WHERE c.nome = 'Alexandre Zamberlan';
 
 
-   	##Mostre os clientes e os escritórios associados no contrato de aluguel:
+   	## Mostre os clientes e os escritórios associados no contrato de aluguel:
 
    		SELECT c.nome AS nome_cliente, e.nome AS nome_escritorio
 		FROM contrato_aluguel ca
